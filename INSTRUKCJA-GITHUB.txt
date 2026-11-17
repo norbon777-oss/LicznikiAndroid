@@ -1,0 +1,11 @@
+LICZNIKI — wersja graficzna
+
+1. Rozpakuj ZIP.
+2. Otwórz folder LicznikiAndroid i prześlij JEGO ZAWARTOŚĆ do repozytorium GitHub (w katalogu głównym repo muszą być app, .github, settings.gradle.kts).
+3. Wejdź do Actions -> Kompilacja APK LICZNIKI -> Run workflow (lub poczekaj na build po push).
+4. Po zakończeniu otwórz wykonanie workflow i pobierz artefakt LICZNIKI-APK.
+5. Rozpakuj pobrany ZIP z artefaktem i zainstaluj app-debug.apk.
+
+UWAGA: ten ZIP zawiera kod źródłowy i workflow do budowy APK; sam nie jest plikiem APK.
+Dane zapisują się lokalnie w aplikacji. Przyciski COFNIJ działają w bieżącej sesji.
+Nowa wersja używa tej samej nazwy pakietu pl.liczniki.app, ale APK debug z GitHub może mieć inny podpis niż poprzednia instalacja.
