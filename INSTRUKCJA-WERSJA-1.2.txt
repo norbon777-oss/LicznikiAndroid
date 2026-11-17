@@ -1,0 +1,4 @@
+LICZNIKI 1.2 — przypięty pasek podsumowania.
+Prześlij pliki z ZIP do katalogu głównego repozytorium GitHub (zachowaj strukturę folderów).
+Workflow powinien budować projekt z katalogu głównego: gradle --no-daemon :app:assembleDebug.
+Pobierz nowe APK z Actions i zainstaluj jako aktualizację, bez odinstalowania aplikacji, aby zachować zapisane dane.
