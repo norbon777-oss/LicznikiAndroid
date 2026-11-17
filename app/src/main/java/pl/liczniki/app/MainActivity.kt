@@ -66,8 +66,11 @@ class MainActivity : Activity() {
         val items = json.optJSONArray("items")
         val fallback = arrayOf("522694320 - ALL", "522694330 - JEEP", "522694570 - FIAT/ALFA", "522694340 - JEEP", "522694580 - FIAT", "522694770 - ALFA")
         val ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
-        val factory = DocumentBuilderFactory.newInstance().apply { isNamespaceAware = true
-            setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
+        // Szablon XLSX jest dostarczany razem z aplikacją (zaufany zasób).
+        // Android nie obsługuje funkcji Xerces disallow-doctype-decl.
+        val factory = DocumentBuilderFactory.newInstance().apply {
+            isNamespaceAware = true
+            isExpandEntityReferences = false
         }
         assets.open("raport_wzor.xlsx").use { template ->
             ZipInputStream(template).use { input ->

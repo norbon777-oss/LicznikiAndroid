@@ -1,0 +1,1 @@
+LICZNIKI 1.4: poprawka eksportu XLSX na Androidzie. Usunięto nieobsługiwaną opcję parsera XML (http://apache.org/xml/features/disallow-doctype-decl). Wersja 1.4 / versionCode 5. Wgraj pliki do głównego katalogu repozytorium, skompiluj przez Actions, zainstaluj jako aktualizację (bez odinstalowania). Dane liczników pozostaną zachowane.
