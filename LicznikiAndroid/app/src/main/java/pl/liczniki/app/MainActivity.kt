@@ -13,11 +13,13 @@ import org.json.JSONObject
 import kotlin.math.min
 
 class MainActivity : Activity() {
+private var currentScroll: ScrollView? = null
  data class Snapshot(val g:Int,val p:Int,val s:Int,val t:Int)
  data class Counter(var name:String,var color:Int,var g:Int=0,var p:Int=0,var s:Int=0,var t:Int=0,val history:MutableList<Snapshot> = mutableListOf())
  private val items=mutableListOf<Counter>()
  private var shown=6; private var plus=1; private var minus=5
  private lateinit var cards:LinearLayout
+ private var currentScroll: ScrollView? = null
  private val dp get()=resources.displayMetrics.density
  private fun d(v:Int)=(v*dp).toInt()
  private fun shape(color:Int,r:Int=12,stroke:Int=0):GradientDrawable = GradientDrawable().apply { setColor(color);cornerRadius=d(r).toFloat();if(stroke!=0)setStroke(d(1),stroke) }
@@ -39,8 +41,13 @@ class MainActivity : Activity() {
  private fun btn(label:String,color:Int,enabled:Boolean=true,action:()->Unit):Button=Button(this).apply {text=label;textSize=12f;isAllCaps=false;setTextColor(Color.WHITE);background=shape(if(enabled)color else 0xFFB9BEC6.toInt(),10);isEnabled=enabled;setOnClickListener{action()}}
  private fun editNumber(title:String,current:Int,onSet:(Int)->Unit){val input=EditText(this).apply{inputType=2;setText(current.toString());selectAll()};AlertDialog.Builder(this).setTitle(title).setView(input).setPositiveButton("Zapisz"){_,_->val n=input.text.toString().toIntOrNull();if(n!=null&&n>0){onSet(n);save();render()}}.setNegativeButton("Anuluj",null).show()}
  private fun render(){
+  val previousY = currentScroll?.scrollY ?: 0
   val root=vertical().apply{setBackgroundColor(0xFFF3F5F8.toInt());setPadding(10,12,10,12)}
-  val scroll=ScrollView(this).apply{isFillViewport=true};scroll.addView(root);setContentView(scroll)
+val scroll=ScrollView(this).apply{isFillViewport=true}
+scroll.addView(root)
+setContentView(scroll)
+currentScroll=scroll
+scroll.post { scroll.scrollTo(0,previousY) }
   root.addView(text("LICZNIKI",26f,true))
   val options=horizontal();pad(options,0,12,0,8)
   val add=btn("+ $plus",0xFF159447.toInt()){editNumber("Wartość dodawania",plus){plus=it}}
@@ -55,7 +62,7 @@ class MainActivity : Activity() {
  }
  private fun counterCard(c:Counter):LinearLayout{
   val card=vertical().apply{background=shape(Color.WHITE,12,0xFFDDE1E8.toInt());pad(this,6,6,6,8)}
-  val head=text(c.name,12f,true).apply{setTextColor(Color.WHITE);background=shape(c.color,8);pad(this,4,10,4,10);setOnClickListener{val input=EditText(this@MainActivity).apply{setText(c.name);selectAll()};AlertDialog.Builder(this@MainActivity).setTitle("Edytuj nazwę").setView(input).setPositiveButton("Zapisz"){_,_->c.name=input.text.toString();save();render()}.setNegativeButton("Anuluj",null).show()}}
+  val head=text(c.name,12f,true).apply{setTextColor(Color.WHITE);background=shape(c.color,8);pad(this,4,10,4,10);setOnClickListener{val input=EditText(this@).apply{setText(c.name);selectAll()};AlertDialog.Builder(this@).setTitle("Edytuj nazwę").setView(input).setPositiveButton("Zapisz"){_,_->c.name=input.text.toString();save();render()}.setNegativeButton("Anuluj",null).show()}}
   card.addView(head,LinearLayout.LayoutParams(-1,-2))
   fun label(s:String)=card.addView(text(s,11f),LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
   fun value(n:Int)=card.addView(text(n.toString(),25f,true))
