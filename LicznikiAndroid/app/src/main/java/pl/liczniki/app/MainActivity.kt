@@ -39,7 +39,7 @@ class MainActivity : Activity() {
  private fun btn(label:String,color:Int,enabled:Boolean=true,action:()->Unit):Button=Button(this).apply {text=label;textSize=12f;isAllCaps=false;setTextColor(Color.WHITE);background=shape(if(enabled)color else 0xFFB9BEC6.toInt(),10);isEnabled=enabled;setOnClickListener{action()}}
  private fun editNumber(title:String,current:Int,onSet:(Int)->Unit){val input=EditText(this).apply{inputType=2;setText(current.toString());selectAll()};AlertDialog.Builder(this).setTitle(title).setView(input).setPositiveButton("Zapisz"){_,_->val n=input.text.toString().toIntOrNull();if(n!=null&&n>0){onSet(n);save();render()}}.setNegativeButton("Anuluj",null).show()}
  private fun render(){
-  val root=vertical().apply{setBackgroundColor(0xFFF3F5F8.toInt());pad(10,12,10,12)}
+  val root=vertical().apply{setBackgroundColor(0xFFF3F5F8.toInt());setPadding(10,12,10,12)}
   val scroll=ScrollView(this).apply{isFillViewport=true};scroll.addView(root);setContentView(scroll)
   root.addView(text("LICZNIKI",26f,true))
   val options=horizontal();pad(options,0,12,0,8)
