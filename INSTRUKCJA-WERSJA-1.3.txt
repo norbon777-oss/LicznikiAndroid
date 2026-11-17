@@ -1,0 +1,12 @@
+LICZNIKI 1.3 - wysylanie raportu Excel
+
+Wgraj zawartosc archiwum do glownego katalogu repozytorium GitHub (zastap pliki).
+Kompilacja: GitHub Actions -> Kompilacja APK LICZNIKI.
+Pobierz LICZNIKI-APK, rozpakuj ZIP i zainstaluj app-debug.apk jako aktualizacje.
+Nie odinstalowuj obecnej aplikacji: w przeciwnym razie dane zapisane lokalnie moga zostac usuniete.
+
+W ustawieniach pojawi sie przycisk WYSLIJ RAPORT EXCEL.
+Raport ma dokladnie 6 kolumn i formatowanie zatwierdzonego wzoru, w tym czerwony SZYMON.
+Raport pobiera dane z pamieci Androida, rowniez z pozycji ukrytych suwakiem.
+Po nacisnieciu przycisku Android otwiera wybor aplikacji, np. Gmail.
+Uzytkownik wybiera odbiorce i sam zatwierdza wysylke.
