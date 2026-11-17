@@ -19,7 +19,6 @@ private var currentScroll: ScrollView? = null
  private val items=mutableListOf<Counter>()
  private var shown=6; private var plus=1; private var minus=5
  private lateinit var cards:LinearLayout
- private var currentScroll: ScrollView? = null
  private val dp get()=resources.displayMetrics.density
  private fun d(v:Int)=(v*dp).toInt()
  private fun shape(color:Int,r:Int=12,stroke:Int=0):GradientDrawable = GradientDrawable().apply { setColor(color);cornerRadius=d(r).toFloat();if(stroke!=0)setStroke(d(1),stroke) }
@@ -62,9 +61,30 @@ scroll.post { scroll.scrollTo(0,previousY) }
  }
  private fun counterCard(c:Counter):LinearLayout{
   val card=vertical().apply{background=shape(Color.WHITE,12,0xFFDDE1E8.toInt());pad(this,6,6,6,8)}
-  val head=text(c.name,12f,true).apply{setTextColor(Color.WHITE);background=shape(c.color,8);pad(this,4,10,4,10);setOnClickListener{val input=EditText(this@).apply{setText(c.name);selectAll()};AlertDialog.Builder(this@).setTitle("Edytuj nazwę").setView(input).setPositiveButton("Zapisz"){_,_->c.name=input.text.toString();save();render()}.setNegativeButton("Anuluj",null).show()}}
+
+val head=text(c.name,12f,true).apply {
+    setTextColor(Color.WHITE)
+    background=shape(c.color,8)
+    pad(this,4,10,4,10)
+    setOnClickListener {
+        val input=EditText(this@MainActivity).apply {
+            setText(c.name)
+            selectAll()
+        }
+        AlertDialog.Builder(this@MainActivity)
+            .setTitle("Edytuj nazwę")
+            .setView(input)
+            .setPositiveButton("Zapisz") { _,_ ->
+                c.name=input.text.toString()
+                save()
+                render()
+            }
+            .setNegativeButton("Anuluj",null)
+            .show()
+    }
+}
   card.addView(head,LinearLayout.LayoutParams(-1,-2))
-  fun label(s:String)=card.addView(text(s,11f),LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
+  fun label(s:String)=card.addView(text(s,11),LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
   fun value(n:Int)=card.addView(text(n.toString(),25f,true))
   label("Licznik główny");value(c.g)
   val controls=horizontal();val a=btn("+$plus",0xFF159447.toInt()){mutate(c){c.g+=plus}};val b=btn("−$minus",0xFFB63C3C.toInt(),c.g>=maxOf(5,minus)){mutate(c){c.g-=minus;c.p+=minus}};controls.addView(a,LinearLayout.LayoutParams(0,d(43),1f).apply{rightMargin=d(3)});controls.addView(b,LinearLayout.LayoutParams(0,d(43),1f));card.addView(controls,LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
