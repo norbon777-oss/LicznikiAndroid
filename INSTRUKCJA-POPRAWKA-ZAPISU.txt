@@ -1,0 +1,18 @@
+LICZNIKI 1.1 — poprawka trwałego zapisu.
+
+Na GitHub wgraj z tej paczki pliki do GŁÓWNEGO katalogu repozytorium,
+NIE do starego folderu LicznikiAndroid/.
+
+Kluczowe pliki:
+app/src/main/java/pl/liczniki/app/MainActivity.kt
+app/src/main/assets/index.html
+app/build.gradle.kts
+
+Workflow .github/workflows/build-apk.yml musi mieć:
+run: gradle --no-daemon :app:assembleDebug
+path: app/build/outputs/apk/debug/*.apk
+bez working-directory: LicznikiAndroid.
+
+Po commit uruchom Actions, pobierz NOWY artefakt i zainstaluj APK.
+Nie odinstalowuj aplikacji, jeśli masz ważne dane: odinstalowanie usuwa dane aplikacji.
+Nowa wersja zapisuje dane w Android SharedPreferences oraz localStorage.
