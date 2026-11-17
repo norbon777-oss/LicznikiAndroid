@@ -1,0 +1,12 @@
+LICZNIKI - kompilacja APK bez Android Studio
+
+1. Zaloguj się na https://github.com i utwórz nowe repozytorium (New repository), np. liczniki-android. Może być Private.
+2. Rozpakuj ZIP. Prześlij do repozytorium ZAWARTOŚĆ folderu LicznikiAndroid (w tym ukryty folder .github), nie sam ZIP ani folder nadrzędny.
+   W GitHub: Add file -> Upload files -> przeciągnij pliki i foldery z rozpakowanego LicznikiAndroid -> Commit changes.
+   Uwaga: folder .github/workflows/build-apk.yml musi znaleźć się w głównym katalogu repozytorium.
+3. Otwórz zakładkę Actions. Jeśli trzeba, włącz Actions. Wybierz Kompilacja APK LICZNIKI i kliknij Run workflow -> Run workflow.
+4. Po zakończeniu otwórz wykonanie z zielonym znacznikiem. W sekcji Artifacts pobierz LICZNIKI-APK.
+5. Rozpakuj pobrany ZIP, aby uzyskać app-debug.apk. Przenieś plik APK na telefon, otwórz i zezwól na instalację z tego źródła.
+
+To wersja debug APK do instalacji prywatnej, bez publikowania w Google Play.
+Wymagany dostęp do internetu podczas budowania. Nie ma gwarancji powodzenia bez uruchomienia kompilacji; w razie błędu prześlij log z Actions.
