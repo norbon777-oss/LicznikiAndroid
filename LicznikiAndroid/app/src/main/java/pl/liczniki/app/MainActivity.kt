@@ -84,7 +84,7 @@ val head=text(c.name,12f,true).apply {
     }
 }
   card.addView(head,LinearLayout.LayoutParams(-1,-2))
-  fun label(s:String)=card.addView(text(s,11),LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
+fun label(s:String)=card.addView(text(s,11f),LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
   fun value(n:Int)=card.addView(text(n.toString(),25f,true))
   label("Licznik główny");value(c.g)
   val controls=horizontal();val a=btn("+$plus",0xFF159447.toInt()){mutate(c){c.g+=plus}};val b=btn("−$minus",0xFFB63C3C.toInt(),c.g>=maxOf(5,minus)){mutate(c){c.g-=minus;c.p+=minus}};controls.addView(a,LinearLayout.LayoutParams(0,d(43),1f).apply{rightMargin=d(3)});controls.addView(b,LinearLayout.LayoutParams(0,d(43),1f));card.addView(controls,LinearLayout.LayoutParams(-1,-2).apply{topMargin=d(7)})
