@@ -1,0 +1,1 @@
+LICZNIKI 1.5 — ręczna edycja wartości.\nPrzytrzymaj liczbę około 0,6 sekundy, wpisz liczbę całkowitą >= 0 i wybierz ZAPISZ.\nDane i podsumowanie aktualizują się automatycznie. COFNIJ przywraca poprzednią wartość.\nPrześlij pliki do głównego katalogu repozytorium i skompiluj w GitHub Actions. Aktualizuj bez odinstalowywania aplikacji.\n
